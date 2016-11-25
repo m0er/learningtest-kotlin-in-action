@@ -11,5 +11,9 @@ class ExprTest {
     @Test
     fun expr() {
         assertEquals(7, eval(Sum(Sum(Num(1), Num(2)), Num(4))))
+
+        assertEquals(7, eval2(Sum(Sum(Num(1), Num(2)), Num(4))))
+
+        assertEquals(7, eval3(Sum(Sum(Num(1), Num(2)), Num(4))))
     }
 }

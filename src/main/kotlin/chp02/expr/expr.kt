@@ -11,9 +11,25 @@ fun eval(e: Expr): Int {
     if (e is Num) {
         val n = e as Num
         return n.value
-    }
-    if (e is Sum) {
+    } else if (e is Sum) {
         return eval(e.right) + eval(e.left)
+    } else {
+        throw IllegalArgumentException("Unknown expression")
     }
-    throw IllegalArgumentException("Unknown expression.")
 }
+
+fun eval2(e: Expr): Int =
+    if (e is Num) {
+        e.value
+    } else if (e is Sum) {
+        eval2(e.right) + eval2(e.left)
+    } else {
+        throw IllegalArgumentException("Unknown expression")
+    }
+
+fun eval3(e: Expr): Int =
+    when (e) {
+        is Num -> e.value
+        is Sum -> eval3(e.right) + eval3(e.left)
+        else -> throw IllegalArgumentException("Unknown expression")
+    }
