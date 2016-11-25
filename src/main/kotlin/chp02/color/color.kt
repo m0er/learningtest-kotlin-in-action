@@ -1,6 +1,6 @@
-package color
+package chp02.color
 
-import color.Color.*
+import chp02.color.Color.*
 
 /**
  * Created by AidenChoi on 2016. 11. 25..

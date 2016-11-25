@@ -1,8 +1,6 @@
 package chp02.color
 
-import color.Color.*
-import color.getMnemonic
-import color.getWarmth
+import chp02.color.Color.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -23,7 +21,7 @@ class ColorTest {
 
     @Test
     fun mix() {
-        assertEquals(GREEN, color.mix(BLUE, YELLOW))
-        assertEquals(GREEN, color.mixOptimized(BLUE, YELLOW))
+        assertEquals(GREEN, mix(BLUE, YELLOW))
+        assertEquals(GREEN, mixOptimized(BLUE, YELLOW))
     }
 }
