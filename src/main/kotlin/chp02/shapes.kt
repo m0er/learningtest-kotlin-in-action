@@ -1,4 +1,4 @@
-package chp02.geometry
+package chp02
 
 import java.util.*
 

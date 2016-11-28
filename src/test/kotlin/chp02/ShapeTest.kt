@@ -1,5 +1,6 @@
-package chp02.geometry
+package chp02
 
+import chp02.createRandomRectangle
 import org.junit.Test
 
 /**

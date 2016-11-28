@@ -1,6 +1,9 @@
-package chp02.color
+package chp02
 
-import chp02.color.Color.*
+import chp02.Color.*
+import chp02.getMnemonic
+import chp02.getWarmth
+import chp02.mixOptimized
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -21,7 +24,7 @@ class ColorTest {
 
     @Test
     fun mix() {
-        assertEquals(GREEN, mix(BLUE, YELLOW))
+        assertEquals(GREEN, chp02.mix(BLUE, YELLOW))
         assertEquals(GREEN, mixOptimized(BLUE, YELLOW))
     }
 }

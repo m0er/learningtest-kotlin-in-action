@@ -1,4 +1,4 @@
-package chp02.expr
+package chp02
 
 /**
  * Created by AidenChoi on 2016. 11. 25..
