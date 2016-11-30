@@ -1,13 +1,14 @@
 package chp02
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
 
 /**
  * Created by AidenChoi on 2016. 11. 28..
  */
-class FizzBuzzTest {
+class LoopTest {
 
     @Test
     fun fizzBuzz() {
@@ -41,5 +42,12 @@ class FizzBuzzTest {
         for ((index, element) in list.withIndex()) {
             println("$index: $element")
         }
+    }
+
+    @Test
+    fun inOperator() {
+        assertTrue(isLetter('q'))
+        assertTrue(isNotDigit('x'))
+        assertEquals("It's a digit!", recognize('8'))
     }
 }
