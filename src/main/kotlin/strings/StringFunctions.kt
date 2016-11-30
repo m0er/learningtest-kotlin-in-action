@@ -1,4 +1,6 @@
-package chp03
+@file:JvmName("StringFunctions")
+
+package strings
 
 /**
  * Created by AidenChoi on 2016. 11. 30..

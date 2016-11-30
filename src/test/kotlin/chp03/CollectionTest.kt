@@ -2,6 +2,7 @@ package chp03
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import strings.joinToString
 
 /**
  * Created by AidenChoi on 2016. 11. 30..
