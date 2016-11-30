@@ -28,4 +28,12 @@ class CollectionTest {
         val numbers = setOf(1, 14, 2)
         assertEquals(14, numbers.max())
     }
+
+    @Test
+    fun joinToString() {
+        val list = listOf(1, 2, 3)
+        assertEquals("1, 2, 3", joinToString(list))
+        assertEquals("(1; 2; 3)", joinToString(list, separator = "; ", prefix = "(", postfix = ")"))
+        assertEquals("# 1, 2, 3", joinToString(list, prefix = "# "))
+    }
 }
