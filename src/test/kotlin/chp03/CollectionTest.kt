@@ -2,6 +2,7 @@ package chp03
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import strings.join
 import strings.joinToString
 
 /**
@@ -33,8 +34,13 @@ class CollectionTest {
     @Test
     fun joinToString() {
         val list = listOf(1, 2, 3)
-        assertEquals("1, 2, 3", joinToString(list))
-        assertEquals("(1; 2; 3)", joinToString(list, separator = "; ", prefix = "(", postfix = ")"))
-        assertEquals("# 1, 2, 3", joinToString(list, prefix = "# "))
+        assertEquals("1, 2, 3", list.joinToString())
+        assertEquals("(1; 2; 3)", list.joinToString(separator = "; ", prefix = "(", postfix = ")"))
+        assertEquals("# 1, 2, 3", list.joinToString(prefix = "# "))
+        assertEquals("1 2 3", list.joinToString(" "))
+
+        assertEquals("one two eight", listOf("one", "two", "eight").join(" "))
+        // Type mismatch.
+        // list.join()
     }
 }
