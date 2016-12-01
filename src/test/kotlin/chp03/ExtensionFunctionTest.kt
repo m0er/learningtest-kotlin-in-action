@@ -11,6 +11,15 @@ import strings.*
 class ExtensionFunctionTest {
 
     @Test
+    fun lastChar() {
+        assertEquals('n', "Kotlin".lastChar())
+
+        val sb = StringBuilder("Kotlin?")
+        sb.lastChar = '!'
+        assertEquals('!', sb.toString().lastChar())
+    }
+
+    @Test
     fun overrideFunction() {
         val view: View = Button()
         view.click()
