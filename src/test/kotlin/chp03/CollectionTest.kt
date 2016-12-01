@@ -43,4 +43,10 @@ class CollectionTest {
         // Type mismatch.
         // list.join()
     }
+
+    @Test
+    fun spreadOperator() {
+        val list = listOf("args: ", *arrayOf("one", "two", "three"))
+        assertEquals(4, list.size)
+    }
 }
