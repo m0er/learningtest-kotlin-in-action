@@ -2,6 +2,7 @@ package chp03
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.io.File
 
 /**
  * Created by AidenChoi on 2016. 12. 1..
@@ -21,5 +22,15 @@ class StringTest {
         assertEquals("/Users/aidenchoi/kotlin-book", directory)
         assertEquals("chapter", fileName)
         assertEquals("adoc", extension)
+    }
+
+    @Test
+    fun regexSubstring() {
+        parsePathRegexp("/Users/aidenchoi/kotlin-book/chapter.adoc")?.let { destructed ->
+            val (directory, fileName, extension) = destructed
+            assertEquals("/Users/aidenchoi/kotlin-book", directory)
+            assertEquals("chapter", fileName)
+            assertEquals("adoc", extension)
+        }
     }
 }

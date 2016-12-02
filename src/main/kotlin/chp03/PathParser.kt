@@ -12,3 +12,8 @@ fun parsePath(path: String): Triple<String, String, String> {
 
     return Triple(directory, fileName, extension)
 }
+
+fun parsePathRegexp(path: String): MatchResult.Destructured? {
+    val regex = """(.+)/(.+)\.(.+)""".toRegex()
+    return regex.matchEntire(path)?.destructured
+}
