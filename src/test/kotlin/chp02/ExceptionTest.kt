@@ -42,4 +42,14 @@ class ExceptionTest {
     fun readNotANumber2() {
         assertNull(readNumber2(BufferedReader(StringReader("not a number"))))
     }
+
+    @Test
+    fun readCorrectNumber3() {
+        assertNotNull(readNumber3("239"))
+    }
+
+    @Test(expected = NumberFormatException::class)
+    fun readNotANumber3() {
+        assertNull(readNumber3("not a number"))
+    }
 }

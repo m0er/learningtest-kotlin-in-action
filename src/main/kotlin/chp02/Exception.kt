@@ -1,6 +1,7 @@
 package chp02
 
 import java.io.BufferedReader
+import java.io.StringReader
 
 /**
  * Created by AidenChoi on 2016. 11. 30..
@@ -30,3 +31,8 @@ fun readNumber2(reader: BufferedReader) = try {
     } catch (e:NumberFormatException) {
         null
     }
+
+// try with resources
+fun readNumber3(text: String) = BufferedReader(StringReader(text)).use {
+    it.readLine()?.toInt()
+}
