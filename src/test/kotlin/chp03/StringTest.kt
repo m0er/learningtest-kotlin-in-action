@@ -33,4 +33,14 @@ class StringTest {
             assertEquals("adoc", extension)
         }
     }
+
+    @Test
+    fun tripleQuotedString() {
+        val kotlinLogo = """
+            .| //
+            .|//
+            .|/ \
+        """
+        println(kotlinLogo.trimMargin("."))
+    }
 }
