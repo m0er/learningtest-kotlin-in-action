@@ -6,13 +6,16 @@ package chp03
 data class User(val id: Int, val name: String, val address: String)
 
 fun saveUser(user: User) {
-    if (user.name.isEmpty()) {
-        throw IllegalArgumentException("Cannot save user ${user.id}: Name is empty")
+    fun validate(user: User,
+                 value: String,
+                 fieldName: String) {
+        if (value.isEmpty()) {
+            throw IllegalArgumentException("Cannot save user ${user.id}: $fieldName is empty")
+        }
     }
 
-    if (user.address.isEmpty()) {
-        throw IllegalArgumentException("Cannot save user ${user.id}: Address is empty")
-    }
+    validate(user, user.name, "Name")
+    validate(user, user.address, "Address")
 
     // Save user to database
 }
