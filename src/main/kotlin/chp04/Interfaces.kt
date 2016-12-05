@@ -70,3 +70,22 @@ class DummyAnimated : Animated() {
     }
 
 }
+
+internal open class TalkativeButton : Focusable {
+    private fun yell() = println("Hey!")
+    protected fun whisper() = println("Let's talk!")
+}
+
+/**
+ * 1. internal 스콥인데 퍼블릭 메소드 만들어서 에러.
+ * 2. yell() 메소드는 private 이라서 같은 클래스에서만 호출 가능.
+ * 3. whisper() 메소드는 protected 여서 같은 클래스나 상속 받은 클래스에서 호출 가능.
+ *
+ * 확장 함수는 private, protected 멤버에 접근 할 수 없음.
+ */
+//fun TalkativeButton.giveSpeech() {
+//
+//    yell()
+//
+//    whisper()
+//}
