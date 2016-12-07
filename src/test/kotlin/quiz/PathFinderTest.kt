@@ -15,7 +15,8 @@ class PathFinderTest {
     fun setUp() {
         pathFinder.setSubwayLine(1, listOf(Station(1, "A"), Station(1, "B"), Station(1, "C", 2), Station(1, "D")))
         pathFinder.setSubwayLine(2, listOf(Station(2, "C", 1), Station(2, "E"), Station(2, "F", 3)))
-        pathFinder.setSubwayLine(3, listOf(Station(3, "G"), Station(3, "F", 2), Station(3, "H"), Station(3, "I")))
+        pathFinder.setSubwayLine(3, listOf(Station(3, "G"), Station(3, "F", 2), Station(3, "H"), Station(3, "I", 4)))
+        pathFinder.setSubwayLine(4, listOf(Station(4, "I", 3), Station(4, "J"), Station(4, "K")))
     }
 
     @Test
@@ -74,6 +75,26 @@ class PathFinderTest {
         pathFinder.setDestinationStation(2, "F")
         pathFinder.findPath()?.apply {
             assertTrue(containsAll(listOf(pathFinder.startStation, station(1, "C"), station(2, "C"), pathFinder.destStation)))
+        }
+    }
+
+    @Test
+    fun _환승역을_두_번_거쳐_경로_역들을_반환_할_수_있다() {
+        pathFinder.setStartStation(1, "A")
+        pathFinder.setDestinationStation(3, "H")
+        pathFinder.findPath()?.apply {
+            println(this)
+            assertTrue(containsAll(listOf(pathFinder.startStation, station(1, "C"), station(2, "C"), station(2, "F"), station(3, "F"), pathFinder.destStation)))
+        }
+    }
+
+    @Test
+    fun _환승역을_세_번_거쳐_경로_역들을_반환_할_수_있다() {
+        pathFinder.setStartStation(1, "A")
+        pathFinder.setDestinationStation(4, "K")
+        pathFinder.findPath()?.apply {
+            println(this)
+            assertTrue(containsAll(listOf(pathFinder.startStation, station(1, "C"), station(2, "C"), station(2, "F"), station(3, "F"), station(3, "I"), station(4, "I"), pathFinder.destStation)))
         }
     }
 
