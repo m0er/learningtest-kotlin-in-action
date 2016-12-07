@@ -13,10 +13,19 @@ class PathFinderTest {
 
     @Before
     fun setUp() {
-        pathFinder.setSubwayLine(1, listOf(Station(1, "A"), Station(1, "B"), Station(1, "C", 2), Station(1, "D"), Station(1, "Z", 4)))
-        pathFinder.setSubwayLine(2, listOf(Station(2, "C", 1), Station(2, "E"), Station(2, "F", 3)))
-        pathFinder.setSubwayLine(3, listOf(Station(3, "G"), Station(3, "F", 2), Station(3, "H"), Station(3, "I", 4)))
-        pathFinder.setSubwayLine(4, listOf(Station(4, "I", 3), Station(4, "J"), Station(4, "K"), Station(4, "Z", 1)))
+        /**
+         *  A - B - C - D -----------
+         *          |                |
+         *          E                |
+         *          |                Z
+         *      G - F - H - I        |
+         *                  |        |
+         *                  J - K ---
+         */
+        pathFinder.setSubwayLine(1, listOf(Station(1, "A"), Station(1, "B"), Station(1, "C", transferTo = 2), Station(1, "D"), Station(1, "Z", transferTo = 4)))
+        pathFinder.setSubwayLine(2, listOf(Station(2, "C", transferTo = 1), Station(2, "E"), Station(2, "F", transferTo = 3)))
+        pathFinder.setSubwayLine(3, listOf(Station(3, "G"), Station(3, "F", transferTo = 2), Station(3, "H"), Station(3, "I", transferTo = 4)))
+        pathFinder.setSubwayLine(4, listOf(Station(4, "I", transferTo = 3), Station(4, "J"), Station(4, "K"), Station(4, "Z", transferTo = 1)))
     }
 
     @Test
@@ -50,12 +59,12 @@ class PathFinderTest {
 
     @Test
     fun _특정_역이_몇호선인지_찾을_수_있다() {
-        assertEquals(2, pathFinder.findOneByStationName("F").lineNumber)
+        assertEquals(2, pathFinder.findOneByStationName("F").line)
     }
 
     @Test(expected = NoSuchElementException::class)
     fun _특정_역이_없으면_예외_발생() {
-        assertEquals(2, pathFinder.findOneByStationName("FOOBAR").lineNumber)
+        assertEquals(2, pathFinder.findOneByStationName("FOOBAR").line)
     }
 
     @Test
