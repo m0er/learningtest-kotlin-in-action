@@ -25,19 +25,19 @@ class PathFinder {
     }
 
     fun findPath() = if (startStation.isSameLine(destStation)) {
-            subwayLines[startStation.lineNumber]?.apply {
-                return subList(indexOf(startStation), indexOf(destStation) + 1)
-            }
-        } else {
-            findTransferStationByLineNumber(startStation.lineNumber)?.let {
-                val transferStations = mutableListOf(it)
-                val pathStations = findAllStationsToDestStations(startStation, it)
-
-                findDestStation(transferStations, pathStations)
-
-                return pathStations
-            }
+        subwayLines[startStation.lineNumber]?.apply {
+            return subList(indexOf(startStation), indexOf(destStation) + 1)
         }
+    } else {
+        findTransferStationByLineNumber(startStation.lineNumber)?.let {
+            val transferStations = mutableListOf(it)
+            val pathStations = findAllStationsToDestStations(startStation, it)
+
+            findDestStation(transferStations, pathStations)
+
+            return pathStations
+        }
+    }
 
     internal fun findDestStation(transferStations: MutableList<Station>, pathStations: MutableList<Station>) {
         val transferStation = transferStations.last()
@@ -68,19 +68,19 @@ class PathFinder {
     }
 
     internal fun findAllStationsByStationName(stationName: String) = subwayLines.map {
-            it.value.find { it.title.equals(stationName) }
-        }.filterNotNull()
+        it.value.find { it.title.equals(stationName) }
+    }.filterNotNull()
 
     internal fun findStationByStationName(lineNumber: Int, stationName: String) = subwayLines.map {
-            it.value.find { it.title.equals(stationName) && it.lineNumber == lineNumber }
-        }.filterNotNull().first()
+        it.value.find { it.title.equals(stationName) && it.lineNumber == lineNumber }
+    }.filterNotNull().first()
 }
 
-data class Station(val lineNumber:Int, val title: String, val transferStation: Boolean = false) {
+data class Station(val lineNumber: Int, val title: String, val transferStation: Boolean = false) {
 
     var transferLine = 0
 
-    constructor(lineNumber:Int, title: String, transferLine: Int) : this(lineNumber, title, true) {
+    constructor(lineNumber: Int, title: String, transferLine: Int) : this(lineNumber, title, true) {
         this.transferLine = transferLine
     }
 
