@@ -39,9 +39,33 @@ class PathFinder {
         }
     }
 
+    fun findEveryPath(): List<List<Station>> {
+        if (startStation.isSameLine(destStation)) {
+            subwayLines[startStation.lineNumber]?.apply {
+                return listOf(subList(indexOf(startStation), indexOf(destStation) + 1))
+            }
+        } else {
+            val results = ArrayList<List<Station>>()
+
+            subwayLines[startStation.lineNumber]?.forEach {
+                if (it.transferStation) {
+                    val transferStations = mutableListOf(it)
+                    val pathStations = findAllStationsToDestStations(startStation, it)
+
+                    findDestStation(transferStations, pathStations)
+
+                    results.add(pathStations)
+                }
+            }
+
+            return results
+        }
+        return emptyList()
+    }
+
     internal fun findDestStation(transferStations: MutableList<Station>, pathStations: MutableList<Station>) {
         val transferStation = transferStations.last()
-        findTransferStationByLineNumber(transferStation.transferLine)?.let { nextTransferStation ->
+        findTransferStationByLineNumberAndTitle(transferStation.transferLine, transferStation.title)?.let { nextTransferStation ->
             transferStations.add(nextTransferStation)
 
             subwayLines[nextTransferStation.lineNumber]?.let {
@@ -56,15 +80,21 @@ class PathFinder {
         }
     }
 
+    internal fun findTransferStationByLineNumberAndTitle(lineNumber: Int, title: String) = subwayLines[lineNumber]!!.let { it.find { it.transferStation && it.title.equals(title) } }
+
     internal fun findTransferStationByLineNumber(lineNumber: Int) = subwayLines[lineNumber]!!.let { it.find { it.transferStation } }
 
     internal fun findAllStationsToDestStations(fromStation: Station, destStation: Station): MutableList<Station> {
-        subwayLines[fromStation.lineNumber]!!.apply {
+        subwayLines[fromStation.lineNumber]?.apply {
             val fromStationIndex = indexOf(fromStation)
             val transferStationIndex = indexOf(destStation)
-            return subList(Math.min(fromStationIndex, transferStationIndex), Math.max(fromStationIndex, transferStationIndex) + 1).toMutableList()
+            return subList(Math.min(fromStationIndex, transferStationIndex), Math.max(fromStationIndex, transferStationIndex) + 1).toMutableList().apply {
+                if (!fromStation.equals(startStation) && !first().transferStation && last().transferStation) {
+                    reverse()
+                }
+            }
         }
-        return ArrayList()
+        return emptyList<Station>().toMutableList()
     }
 
     internal fun findAllStationsByStationName(stationName: String) = subwayLines.map {
