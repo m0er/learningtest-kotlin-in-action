@@ -1,6 +1,6 @@
 package chp02
 
-import chp02.*
+import chp02.Expr.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
